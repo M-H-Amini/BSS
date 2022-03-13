@@ -97,8 +97,6 @@ class BSS:
     
     def orthogonalize(self,W):
         
-        #ortho=np.dot(sp.linalg.fractional_matrix_power(np.linalg.inv(np.dot(W,np.transpose(W))),0.5),W)
-        
         term1=np.dot(W,np.transpose(W))
         print('term1',term1)
         term2=alg.pinv(term1)
@@ -107,13 +105,6 @@ class BSS:
         print('term3',term3)
         term4=np.dot(term3,W)
         ortho=term4
-        #ortho=np.dot(sp.linalg.fractional_matrix_power(np.linalg.inv(np.dot(W,np.transpose(W))),0.5),W)
-        #norms=alg.norm(ortho,axis=0)
-        #ortho=ortho/norms
-        
-        print('********',ortho)
-        #print('$$$$$$$$',norms)
-        #print('%%%%%%%%',alg.norm(ortho,axis=0))
         return ortho
         
     def list2Matrix(self,w):
@@ -274,11 +265,3 @@ if __name__=='__main__':
     bss.writeSourcesToAudios('icas')
     sm.plotSound((sm.samp_freq,bss.S[0,:]),[-1000,-1])
     sm.getSoundsMatrix()
-    '''
-    w=np.random.randn(4,4)
-    w=w/alg.norm(w,axis=0)
-    print('wlll',w,alg.norm(w,axis=0))
-    w=bss.orthogonalize(w)
-    print('nwlll',w,alg.norm(w,axis=0))
-    print(np.dot(np.transpose(w[:,0:1]),w[:,3:4]))
-    '''
